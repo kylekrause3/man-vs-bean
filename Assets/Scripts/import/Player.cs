@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public Transform camtransform;
 
     [Header("Health")]
-    public HealthBar healthBar;
+    //public HealthBar healthBar;
     public float maxHealth;
     public float currenthealth;
     public float regenerationAmount;
@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     int lastTimeHitSecs;
 
     [Header("Inventory")]
-    [SerializeField] private UI_Inventory uiInventory;
+    //[SerializeField] private UI_Inventory uiInventory;
     public Inventory inventory;
 
 
@@ -33,8 +33,8 @@ public class Player : MonoBehaviour
     public LayerMask groundMask;
     thirdpersonmovement mvmt;
 
-    [Header("Attacking")]
-    public Gun gun;
+    //[Header("Attacking")]
+    //public Gun gun;
     /*
     public Transform gunTransform;
     public ParticleSystem muzzleFlash;
@@ -53,11 +53,11 @@ public class Player : MonoBehaviour
     void Start()
     {
 
-        healthBar.SetMaxHealth(maxHealth);
+        //healthBar.SetMaxHealth(maxHealth);
 
         inventory = new Inventory(UseItem, this);
-        uiInventory.SetInventory(inventory);
-        uiInventory.SetPlayer(this);
+        //uiInventory.SetInventory(inventory);
+        //uiInventory.SetPlayer(this);
 
         mvmt = new thirdpersonmovement(this.transform, speed, gravity, charcontroller, camtransform, groundCheck, groundMask);
 
@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currenthealth -= damage;
-        healthBar.SetHealth(currenthealth);
+        //healthBar.SetHealth(currenthealth);
         lastTimeHit = Time.time;
         lastTimeHitSecs = (int)(Time.time % 60);
 
@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
     public void Heal(float amt)
     {
         currenthealth += amt;
-        healthBar.SetHealth(currenthealth);
+        //healthBar.SetHealth(currenthealth);
 
         if (currenthealth >= maxHealth)
             currenthealth = maxHealth;
@@ -132,7 +132,7 @@ public class Player : MonoBehaviour
                 regenerationAmount *= 1.5f;
                 break;
             case Item.Type.AttackBoost:
-                gun.setDamageMod(gun.getDamageMod() + item.intensity);
+                //gun.setDamageMod(gun.getDamageMod() + item.intensity);
                 break;
             default: break;
         }
