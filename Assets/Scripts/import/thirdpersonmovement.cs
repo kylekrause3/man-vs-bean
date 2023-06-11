@@ -91,7 +91,7 @@ public class thirdpersonmovement : MonoBehaviour
         this.enabled = true;
     }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.position, ground_check_size);

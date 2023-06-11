@@ -33,7 +33,7 @@ public class CamMovement : MonoBehaviour
         player.Rotate(Vector3.up * mouseX); // Vector3.up is the same as Vector3(0, 1, 0), ROTATING ALONG Y AXIS
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, new Vector3(0.1f, 0.1f, 0.1f));
