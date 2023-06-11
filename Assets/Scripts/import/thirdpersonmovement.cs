@@ -14,7 +14,7 @@ public class thirdpersonmovement : MonoBehaviour
 
     private Vector3 verticalMovementAmount = new Vector3(0f, -2f, 0f);
     private float activespeed;
-    private float ground_check_size = .41f;
+    private float ground_check_size = 0.42f;
     private bool groundContact;
     private bool headContact;
 
@@ -76,7 +76,6 @@ public class thirdpersonmovement : MonoBehaviour
             verticalMovementAmount.y = Mathf.Sqrt(jumpHeight * airDescentSpeed);
         }
         verticalMovementAmount.y -= airDescentSpeed * Time.deltaTime;
-
 
         controller.Move((move.normalized * activespeed + verticalMovementAmount) * Time.deltaTime);
     }
