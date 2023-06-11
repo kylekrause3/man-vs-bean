@@ -1,53 +1,59 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class thirdpersonmovement
+public class thirdpersonmovement : MonoBehaviour
 {
     #region vars
-    Transform player;
+    public Transform player;
+    public CharacterController controller;
+    public Transform groundCheck;
+    public Transform headCheck;
+    public LayerMask groundMask;
 
-    float activespeed, gravity;
+    public float speed, jumpHeight, airDescentSpeed;
 
-    CharacterController controller;
+    private Vector3 verticalMovementAmount = new Vector3(0f, -2f, 0f);
+    private float activespeed;
+    private float ground_check_size = .41f;
+    private bool groundContact;
+    private bool headContact;
 
-    Transform groundCheck;
-    LayerMask groundMask;
+    private Vector3 previousPosition;
+    private Vector3 velocity;
 
-
-    public GameObject model;
-
-    Vector3 movevert;
-
-    bool grounded;
-    public float groundCheckSize;
+    private bool isJumping;
+    private float groundAttractionAmount;
 
     #endregion
-
-
-    public thirdpersonmovement(Transform player, float speed, float gravity, CharacterController controller, Transform cam, Transform groundCheck, LayerMask groundMask)
+    private void Start()
     {
-        /*this.jumpheight = jumpheight;
-        this.speed = speed;*/
-        this.gravity = gravity;
+        previousPosition = transform.position;
 
-        this.controller = controller;
-        this.groundCheck = groundCheck;
-        this.groundMask = groundMask;
-
-        this.player = player;
-
-        movevert.y = -2f;
-        activespeed = speed * 1f;
-
-        groundCheckSize = .41f;
+        groundAttractionAmount = airDescentSpeed / 4f * -1f;
     }
 
-    public void Movement(float speed, float jumpheight)
+    private void FixedUpdate()
     {
+        velocity = transform.position - previousPosition;
+        previousPosition = transform.position;
+        groundContact = Physics.CheckSphere(groundCheck.position, ground_check_size, groundMask);
+        headContact = Physics.CheckSphere(headCheck.position, ground_check_size, groundMask);
+    }
 
-        grounded = Physics.CheckSphere(groundCheck.position, groundCheckSize, groundMask);
-        if (grounded && movevert.y < 0)
+    void Update()
+    {
+        isJumping = verticalMovementAmount.y > 0f;
+
+        if (!groundContact)
         {
-            movevert.y = gravity / 3f * -1f;
+            if (headContact)
+            {
+                verticalMovementAmount.y = groundAttractionAmount / 4;
+            }
+        }
+        if (groundContact && !isJumping)
+        {
+            verticalMovementAmount.y = groundAttractionAmount;
         }
 
         float x = Input.GetAxisRaw("Horizontal");
@@ -65,35 +71,30 @@ public class thirdpersonmovement
         }
 
 
-        if (Input.GetButtonDown("Jump") && grounded)
+        if (Input.GetButtonDown("Jump") && groundContact)
         {
-            movevert.y = Mathf.Sqrt(jumpheight * gravity);
+            verticalMovementAmount.y = Mathf.Sqrt(jumpHeight * airDescentSpeed);
         }
-        movevert.y -= gravity * Time.deltaTime;
+        verticalMovementAmount.y -= airDescentSpeed * Time.deltaTime;
 
 
-        controller.Move((move.normalized * activespeed + movevert) * Time.deltaTime);
+        controller.Move((move.normalized * activespeed + verticalMovementAmount) * Time.deltaTime);
     }
 
-
-    /*bool Menu()
+    private void OnApplicationPause(bool pause)
     {
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            paused = !paused;
-            if (paused)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                return true;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                return false;
-            }
-        }
-        else return paused;
-    }*/
+        this.enabled = false;
+    }
 
+    private void OnApplicationFocus(bool focus)
+    {
+        this.enabled = true;
+    }
 
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(groundCheck.position, ground_check_size);
+        Gizmos.DrawWireSphere(headCheck.position, ground_check_size);
+    }
 }

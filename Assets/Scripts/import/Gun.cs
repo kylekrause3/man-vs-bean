@@ -16,8 +16,8 @@ public class Gun : MonoBehaviour
     public float fireRate = 5f; //bullets per second
     public float impactforce;
 
-    public ParticleSystem muzzleFlash;
-    public GameObject impactEffect;
+    //public ParticleSystem muzzleFlash;
+    //public GameObject impactEffect;
 
     private float nextFireTime = 0f;
     private bool mouseInUse = false;
@@ -55,7 +55,7 @@ public class Gun : MonoBehaviour
     {
         if (nextFireTime <= Time.time)
         {
-            muzzleFlash.Play();
+            //muzzleFlash.Play();
 
             origin.position += origin.transform.forward * VirtualCamera.getCamDistance();
             nextFireTime = Time.time + (1f / fireRate);
@@ -70,8 +70,8 @@ public class Gun : MonoBehaviour
 
                 hitInfo.rigidbody?.AddForce(-hitInfo.normal * impactforce);
 
-                GameObject impact = Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-                Destroy(impact, 1f);
+                //GameObject impact = Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                //Destroy(impact, 1f);
             }
         }
     }

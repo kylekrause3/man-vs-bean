@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [Header("General Vars")]
-    public GameObject playermodel;
+    //[Header("General Vars")]
+    //public GameObject playermodel;
 
     [Header("Health")]
     public HealthBar healthBar;

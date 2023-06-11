@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,10 @@ public class HealthBar : MonoBehaviour
     public Gradient gradient;
     public Image fill;
 
+    private void Start()
+    {
+        slider.fillRect = fill.rectTransform;
+    }
     public void SetMaxHealth(float health)
     {
         slider.maxValue = health;

@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public Transform camtransform;
 
     [Header("Health")]
-    //public HealthBar healthBar;
+    public HealthBar healthBar;
     public float maxHealth;
     public float currenthealth;
     public float regenerationAmount;
@@ -22,17 +22,6 @@ public class Player : MonoBehaviour
     //[SerializeField] private UI_Inventory uiInventory;
     public Inventory inventory;
 
-
-    [Header("Movement")]
-    public float jumpheight = 3f;
-    public float speed = 6f;
-    public float gravity = 10f;
-    public CharacterController charcontroller;
-
-    public Transform groundCheck;
-    public LayerMask groundMask;
-    thirdpersonmovement mvmt;
-
     //[Header("Attacking")]
     //public Gun gun;
     /*
@@ -40,7 +29,7 @@ public class Player : MonoBehaviour
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;*/
 
-    //Gun gun;
+    //Gun gun; only used for perk damage modification
 
 
 
@@ -53,32 +42,22 @@ public class Player : MonoBehaviour
     void Start()
     {
 
-        //healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetMaxHealth(maxHealth);
 
         inventory = new Inventory(UseItem, this);
         //uiInventory.SetInventory(inventory);
         //uiInventory.SetPlayer(this);
 
-        mvmt = new thirdpersonmovement(this.transform, speed, gravity, charcontroller, camtransform, groundCheck, groundMask);
-
-        //gun = new Gun(muzzleFlash, impactEffect, 10f);
-
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
-    {
-        mvmt.Movement(speed, jumpheight);
+    { 
 
         if (Input.GetKeyDown(KeyCode.J))
         {
             TakeDamage(5f);
         }
-        /*if (Input.GetAxisRaw("Fire1") != 0 || Input.GetKeyDown(KeyCode.L))
-        {
-            gun.shoot(camtransform, damagemod);
-        }*/
-
 
         //regen
         if (currenthealth < maxHealth)
@@ -93,7 +72,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currenthealth -= damage;
-        //healthBar.SetHealth(currenthealth);
+        healthBar.SetHealth(currenthealth);
         lastTimeHit = Time.time;
         lastTimeHitSecs = (int)(Time.time % 60);
 
@@ -102,7 +81,7 @@ public class Player : MonoBehaviour
     public void Heal(float amt)
     {
         currenthealth += amt;
-        //healthBar.SetHealth(currenthealth);
+        healthBar.SetHealth(currenthealth);
 
         if (currenthealth >= maxHealth)
             currenthealth = maxHealth;
@@ -125,8 +104,10 @@ public class Player : MonoBehaviour
     {
         switch (item.itemType)
         {
-            case Item.Type.JumpBoost: jumpheight += item.intensity; break;
-            case Item.Type.SpeedBoost: speed += item.intensity; break;
+            case Item.Type.JumpBoost: //jumpheight += item.intensity; break; needs fix
+                break;
+            case Item.Type.SpeedBoost: //speed += item.intensity; break; needs fix
+                break;
             case Item.Type.RegenBoost:
                 regenerationTime -= item.intensity;
                 regenerationAmount *= 1.5f;
