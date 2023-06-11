@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class NetCodeManager : MonoBehaviourPunCallbacks
 {
@@ -9,6 +10,8 @@ public class NetCodeManager : MonoBehaviourPunCallbacks
 
     public GameObject player;
     public Transform spawnPoint;
+
+    private GameObject playerClient;
 
     void Start()
     {
@@ -46,7 +49,12 @@ public class NetCodeManager : MonoBehaviourPunCallbacks
 
         Debug.Log("Connected to room now");
 
-        GameObject playerClient = PhotonNetwork.Instantiate(player.name, spawnPoint.position, Quaternion.identity);
+        playerClient = PhotonNetwork.Instantiate(player.name, spawnPoint.position, Quaternion.identity);
         playerClient.GetComponentInChildren<PlayerSetup>().isLocalPlayer();
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        base.OnDisconnected(cause);
     }
 }

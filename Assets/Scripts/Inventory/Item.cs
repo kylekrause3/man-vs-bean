@@ -62,7 +62,7 @@ public class Item
             case Type.JumpBoost:
                 return true;//all above are stackable
             //insert cases here for not stackable items
-                return false;//all above are not stackable
+                //return false;//all above are not stackable
         }
     }
 
