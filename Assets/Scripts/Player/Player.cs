@@ -72,6 +72,7 @@ public class Player : MonoBehaviour
         lastTimeHit = Time.time;
         lastTimeHitSecs = (int)(Time.time % 60);
 
+        Debug.Log(healthBar);
     }
 
     public void Heal(float amt)
