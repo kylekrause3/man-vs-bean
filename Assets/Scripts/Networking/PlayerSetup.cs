@@ -13,12 +13,14 @@ public class PlayerSetup : MonoBehaviour
     public CamMovement playerRotation;
     public GameObject camera;
     public GameObject HUD;
+    public AudioListener audioListener;
 
     public void isLocalPlayer()
     {
         playerMovement.enabled = true;
         playerData.enabled = true;
         playerRotation.enabled = true;
+        audioListener.enabled = true;
         HUD.SetActive(true);
         camera.SetActive(true);
     }

@@ -638,6 +638,7 @@ MonoBehaviour:
   playerRotation: {fileID: 8303071541383963547}
   camera: {fileID: 444183260659419754}
   HUD: {fileID: 8476554057044991625}
+  audioListener: {fileID: 3887752444680432317}
 --- !u!1 &5814825498563780214
 GameObject:
   m_ObjectHideFlags: 0
@@ -996,7 +997,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7423179727665084170}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!114 &4450309703791461780
 MonoBehaviour:
   m_ObjectHideFlags: 0
