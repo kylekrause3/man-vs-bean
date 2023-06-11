@@ -62,11 +62,11 @@ public class Gun : MonoBehaviour
             if (Physics.Raycast(origin.position, origin.transform.forward, out hitInfo, range))
             {
                 Enemy enemyHit = hitInfo.transform.GetComponent<Enemy>();
+                Player playerHit = hitInfo.transform.GetComponent<Player>();
                 Debug.DrawLine(origin.position, hitInfo.point, Color.red, .5f);
-                if (enemyHit != null)
-                {
-                    enemyHit.TakeDamage(damage * damagemodifier);
-                }
+                enemyHit?.TakeDamage(damage * damagemodifier);
+                playerHit?.TakeDamage(damage * damagemodifier);
+
 
                 hitInfo.rigidbody?.AddForce(-hitInfo.normal * impactforce);
 
