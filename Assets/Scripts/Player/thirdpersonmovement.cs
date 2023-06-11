@@ -42,15 +42,12 @@ public class thirdpersonmovement : MonoBehaviour
     {
         isJumping = verticalMovementAmount.y > 0f;
 
-        if (!groundContact)
-        {
-            if (headContact)
-            {
+        if (!groundContact) {
+            if (headContact) {
                 verticalMovementAmount.y = groundAttractionAmount / 4;
             }
         }
-        if (groundContact && !isJumping)
-        {
+        if (groundContact && !isJumping) {
             verticalMovementAmount.y = groundAttractionAmount;
         }
 
@@ -59,33 +56,19 @@ public class thirdpersonmovement : MonoBehaviour
         Vector3 move = player.transform.right * x + player.transform.forward * z;
 
 
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-        {
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) {
             activespeed = runSpeed;
-        }
-        else
-        {
+        } else {
             activespeed = baseSpeed;
         }
 
 
-        if (Input.GetButtonDown("Jump") && groundContact)
-        {
+        if (Input.GetButtonDown("Jump") && groundContact) {
             verticalMovementAmount.y = Mathf.Sqrt(jumpHeight * airDescentSpeed);
         }
         verticalMovementAmount.y -= airDescentSpeed * Time.deltaTime;
 
         controller.Move((move.normalized * activespeed + verticalMovementAmount) * Time.deltaTime);
-    }
-
-    private void OnApplicationPause(bool pause)
-    {
-        this.enabled = false;
-    }
-
-    private void OnApplicationFocus(bool focus)
-    {
-        this.enabled = true;
     }
 
     void OnDrawGizmos()

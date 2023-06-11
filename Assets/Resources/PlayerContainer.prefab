@@ -50,7 +50,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3474588677323847258
 Transform:
   m_ObjectHideFlags: 0
@@ -636,7 +636,7 @@ MonoBehaviour:
   playerMovement: {fileID: 3632232598477201724}
   playerData: {fileID: 3119272569698029783}
   playerRotation: {fileID: 8303071541383963547}
-  camera: {fileID: 7423179727665084170}
+  camera: {fileID: 444183260659419754}
 --- !u!1 &5814825498563780214
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,7 +921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1740148293787942342
 Transform:
   m_ObjectHideFlags: 0
