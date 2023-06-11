@@ -9,7 +9,7 @@ public class thirdpersonmovement : MonoBehaviour
     public Transform headCheck;
     public LayerMask groundMask;
 
-    public float speed, jumpHeight, airDescentSpeed;
+    public float baseSpeed, runSpeed, jumpHeight, airDescentSpeed;
 
     private Vector3 verticalMovementAmount = new Vector3(0f, -2f, 0f);
     private float activespeed;
@@ -61,11 +61,11 @@ public class thirdpersonmovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
         {
-            activespeed = speed * 2f;
+            activespeed = runSpeed;
         }
         else
         {
-            activespeed = speed * 1f;
+            activespeed = baseSpeed;
         }
 
 

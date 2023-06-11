@@ -50,7 +50,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3474588677323847258
 Transform:
   m_ObjectHideFlags: 0
@@ -163,7 +163,6 @@ GameObject:
   - component: {fileID: 3632232598477201724}
   - component: {fileID: 7993071741262378410}
   - component: {fileID: 8183644334933024006}
-  - component: {fileID: 1118337018757313037}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -278,8 +277,9 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  speed: 6
-  jumpHeight: 15
+  baseSpeed: 6
+  runSpeed: 9
+  jumpHeight: 5
   airDescentSpeed: 20
 --- !u!114 &7993071741262378410
 MonoBehaviour:
@@ -320,22 +320,6 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &1118337018757313037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1404646200433914277}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bba39b14b3cf1fe47b94749dbd8b421a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerMovement: {fileID: 3632232598477201724}
-  playerData: {fileID: 3119272569698029783}
-  playerRotation: {fileID: 8303071541383963547}
-  camera: {fileID: 444183260659419754}
 --- !u!1 &1568652184305991614
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,6 +594,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6642160275180692708}
+  - component: {fileID: 4185151980784334015}
   m_Layer: 0
   m_Name: PlayerContainer
   m_TagString: Untagged
@@ -636,6 +621,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4185151980784334015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4807032037891918230}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bba39b14b3cf1fe47b94749dbd8b421a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 3632232598477201724}
+  playerData: {fileID: 3119272569698029783}
+  playerRotation: {fileID: 8303071541383963547}
+  camera: {fileID: 7423179727665084170}
 --- !u!1 &5814825498563780214
 GameObject:
   m_ObjectHideFlags: 0
@@ -920,7 +921,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1740148293787942342
 Transform:
   m_ObjectHideFlags: 0
