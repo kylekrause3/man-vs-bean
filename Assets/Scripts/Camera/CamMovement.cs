@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+
+using Unity.Netcode;
+
 using UnityEngine;
 
-public class CamMovement : MonoBehaviour
+public class CamMovement : NetworkBehaviour
 {
     public float sensitivity = 100;
     float actualsens;
@@ -20,6 +23,7 @@ public class CamMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!IsOwner) return;
         float mouseX = Input.GetAxis("Mouse X") * actualsens * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * actualsens * Time.deltaTime;
 

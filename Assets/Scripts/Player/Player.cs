@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
+
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : NetworkBehaviour
 {
     [Header("General Vars")]
     public GameObject playermodel;
@@ -48,8 +50,8 @@ public class Player : MonoBehaviour
     }
 
     void Update()
-    { 
-
+    {
+        if (!IsOwner) return;
         if (Input.GetKeyDown(KeyCode.J))
         {
             TakeDamage(5f);
