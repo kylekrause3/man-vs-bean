@@ -23,7 +23,6 @@ public class CamMovement : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!IsOwner) return;
         float mouseX = Input.GetAxis("Mouse X") * actualsens * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * actualsens * Time.deltaTime;
 

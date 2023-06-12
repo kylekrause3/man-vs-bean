@@ -27,7 +27,6 @@ public class thirdpersonmovement : NetworkBehaviour
 
     private void Start()
     {
-        if (!IsOwner) return;
         previousPosition = transform.position;
 
         groundAttractionAmount = airDescentSpeed / 4f * -1f;
@@ -35,7 +34,6 @@ public class thirdpersonmovement : NetworkBehaviour
 
     private void FixedUpdate()
     {
-        if (!IsOwner) return;
         velocity = transform.position - previousPosition;
         previousPosition = transform.position;
         groundContact = Physics.CheckSphere(groundCheck.position, ground_check_size, groundMask);
@@ -44,7 +42,6 @@ public class thirdpersonmovement : NetworkBehaviour
 
     void Update()
     {
-        if (!IsOwner) return;
         isJumping = verticalMovementAmount.y > 0f;
 
         if (!groundContact) {

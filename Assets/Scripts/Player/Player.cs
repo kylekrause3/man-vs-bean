@@ -51,7 +51,6 @@ public class Player : NetworkBehaviour
 
     void Update()
     {
-        if (!IsOwner) return;
         if (Input.GetKeyDown(KeyCode.J))
         {
             TakeDamage(5f);
