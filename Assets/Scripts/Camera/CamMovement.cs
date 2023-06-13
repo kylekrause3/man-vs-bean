@@ -1,11 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-
-using Unity.Netcode;
-
 using UnityEngine;
 
-public class CamMovement : NetworkBehaviour
+public class CamMovement : MonoBehaviour
 {
     public float sensitivity = 100;
     float actualsens;

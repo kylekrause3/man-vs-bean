@@ -1,9 +1,7 @@
-using Unity.Netcode;
-
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class thirdpersonmovement : NetworkBehaviour
+public class thirdpersonmovement : MonoBehaviour
 {
     public Transform player;
     public CharacterController controller;

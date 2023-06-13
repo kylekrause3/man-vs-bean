@@ -1,10 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Netcode;
-
 using UnityEngine;
 
-public class Player : NetworkBehaviour
+public class Player : MonoBehaviour
 {
     [Header("General Vars")]
     public GameObject playermodel;
@@ -50,7 +48,8 @@ public class Player : NetworkBehaviour
     }
 
     void Update()
-    {
+    { 
+
         if (Input.GetKeyDown(KeyCode.J))
         {
             TakeDamage(5f);
@@ -72,6 +71,8 @@ public class Player : NetworkBehaviour
         healthBar.SetHealth(currenthealth);
         lastTimeHit = Time.time;
         lastTimeHitSecs = (int)(Time.time % 60);
+
+        Debug.Log(healthBar);
     }
 
     public void Heal(float amt)
