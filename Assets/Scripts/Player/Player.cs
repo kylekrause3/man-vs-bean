@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [Header("Health")]
     public HealthBar healthBar;
     public float maxHealth;
-    public float currenthealth;
+    public float currentHealth;
     public float regenerationAmount;
     public float regenerationTime;
     float lastTimeHit;
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        currenthealth = maxHealth;
+        currentHealth = maxHealth;
     }
 
     void Start()
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
         }
 
         //regen
-        if (currenthealth < maxHealth)
+        if (currentHealth < maxHealth)
         {
             if ((int)(Time.time % 60) >= lastTimeHitSecs + regenerationTime)
             {
@@ -67,8 +67,8 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        currenthealth -= damage;
-        healthBar.SetHealth(currenthealth);
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
         lastTimeHit = Time.time;
         lastTimeHitSecs = (int)(Time.time % 60);
 
@@ -77,11 +77,11 @@ public class Player : MonoBehaviour
 
     public void Heal(float amt)
     {
-        currenthealth += amt;
-        healthBar.SetHealth(currenthealth);
+        currentHealth += amt;
+        healthBar.SetHealth(currentHealth);
 
-        if (currenthealth >= maxHealth)
-            currenthealth = maxHealth;
+        if (currentHealth >= maxHealth)
+            currentHealth = maxHealth;
     }
 
     public void UseItem(Item item)

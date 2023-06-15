@@ -815,6 +815,11 @@ namespace Photon.Pun
                 }
             }
         }
+
+        public bool HasNext()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 
