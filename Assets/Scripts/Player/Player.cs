@@ -1,8 +1,10 @@
+using Photon.Pun;
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IPunObservable
 {
     [Header("General Vars")]
     public GameObject playermodel;
@@ -72,7 +74,15 @@ public class Player : MonoBehaviour
         lastTimeHit = Time.time;
         lastTimeHitSecs = (int)(Time.time % 60);
 
-        Debug.Log(healthBar);
+        if (currentHealth <= 0f) {
+            Death();
+        }
+
+    }
+
+    public void Death()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
 
     public void Heal(float amt)
@@ -80,8 +90,21 @@ public class Player : MonoBehaviour
         currentHealth += amt;
         healthBar.SetHealth(currentHealth);
 
-        if (currentHealth >= maxHealth)
+        if (currentHealth >= maxHealth) {
             currentHealth = maxHealth;
+        }
+            
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting) {
+            // Send the health data to other clients
+            stream.SendNext(currentHealth);
+        } else if (stream.IsReading) {
+            // Receive the health data from the owner client
+            currentHealth = (float)stream.ReceiveNext();
+        }
     }
 
     public void UseItem(Item item)

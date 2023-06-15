@@ -1,10 +1,12 @@
+using Photon.Pun;
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IPunObservable
 {
     //[Header("General Vars")]
     //public GameObject playermodel;
@@ -12,7 +14,7 @@ public class Enemy : MonoBehaviour
     [Header("Health")]
     public HealthBar healthBar;
     public float maxHealth;
-    public float currenthealth;
+    public float currentHealth;
     public float regenerationAmount;
     public float regenerationTime;
     float lastTimeHit;
@@ -21,7 +23,7 @@ public class Enemy : MonoBehaviour
 
     void Awake()
     {
-        currenthealth = maxHealth;
+        currentHealth = maxHealth;
     }
 
     void Start()
@@ -35,39 +37,54 @@ public class Enemy : MonoBehaviour
         {
             TakeDamage(5f);
         }
-
+        healthBar.SetHealth(currentHealth);
         //regen
-        if (currenthealth < maxHealth)
-            if ((int)(Time.time % 60) >= lastTimeHitSecs + regenerationTime)
-                Heal(regenerationAmount * Time.deltaTime);
-        
+        if (currentHealth < maxHealth) {
+            if ((int)(Time.time % 60) >= lastTimeHitSecs + regenerationTime) {
+                //Heal(regenerationAmount * Time.deltaTime);
+            }
+        } 
     }
-
 
     public void TakeDamage(float damage)
     {
-        currenthealth -= damage;
-        healthBar.SetHealth(currenthealth);
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
         lastTimeHit = Time.time;
         lastTimeHitSecs = (int)(Time.time % 60);
 
-        if (currenthealth <= 0f)
+        if (currentHealth <= 0f)
         {
             Death();
         }
     }
 
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting) {
+            // Send the health data to other clients
+            stream.SendNext(currentHealth);
+
+        } else if (stream.IsReading) {
+            // Receive the health data from the owner client
+            currentHealth = (float)stream.ReceiveNext();
+            Debug.Log("Reading data: " + currentHealth);
+        }
+    }
+
     public void Heal(float amt)
     {
-        currenthealth += amt;
-        healthBar.SetHealth(currenthealth);
+        currentHealth += amt;
+        healthBar.SetHealth(currentHealth);
 
-        if (currenthealth >= maxHealth)
-            currenthealth = maxHealth;
+        if (currentHealth >= maxHealth) {
+            currentHealth = maxHealth;
+        }
+            
     }
 
     public void Death()
     {
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 }
