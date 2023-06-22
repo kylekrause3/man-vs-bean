@@ -1,10 +1,8 @@
 using Photon.Pun;
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour, IPunObservable
+public class Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     [Header("General Vars")]
     public GameObject playermodel;
@@ -20,17 +18,7 @@ public class Player : MonoBehaviour, IPunObservable
     int lastTimeHitSecs;
 
     [Header("Inventory")]
-    //[SerializeField] private UI_Inventory uiInventory;
     public Inventory inventory;
-
-    //[Header("Attacking")]
-    //public Gun gun;
-    /*
-    public Transform gunTransform;
-    public ParticleSystem muzzleFlash;
-    public GameObject impactEffect;*/
-
-    //Gun gun; only used for perk damage modification
 
     void Awake()
     {
@@ -39,36 +27,34 @@ public class Player : MonoBehaviour, IPunObservable
 
     void Start()
     {
-
         healthBar.SetMaxHealth(maxHealth);
 
         inventory = new Inventory(UseItem, this);
-        //uiInventory.SetInventory(inventory);
-        //uiInventory.SetPlayer(this);
 
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
-    { 
-
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            TakeDamage(5f);
+    {
+        if (Input.GetKeyDown(KeyCode.J)) {
+            if (photonView.IsMine) {
+                TakeDamage(5f);
+            }
         }
 
-        //regen
-        if (currentHealth < maxHealth)
-        {
-            if ((int)(Time.time % 60) >= lastTimeHitSecs + regenerationTime)
-            {
-                Heal(regenerationAmount * Time.deltaTime);
+        if (currentHealth < maxHealth) {
+            if ((int)(Time.time % 60) >= lastTimeHitSecs + regenerationTime) {
+                if (photonView.IsMine) {
+                    Heal(regenerationAmount * Time.deltaTime);
+                }
             }
         }
     }
 
     public void TakeDamage(float damage)
     {
+        if (!photonView.IsMine) return;
+
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         lastTimeHit = Time.time;
@@ -77,65 +63,52 @@ public class Player : MonoBehaviour, IPunObservable
         if (currentHealth <= 0f) {
             Death();
         }
-
     }
 
     public void Death()
     {
-        PhotonNetwork.Destroy(gameObject);
+        if (photonView.IsMine) {
+            PhotonNetwork.Destroy(gameObject);
+        }
     }
 
     public void Heal(float amt)
     {
+        if (!photonView.IsMine) return;
+
         currentHealth += amt;
         healthBar.SetHealth(currentHealth);
 
         if (currentHealth >= maxHealth) {
             currentHealth = maxHealth;
         }
-            
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
         if (stream.IsWriting) {
-            // Send the health data to other clients
             stream.SendNext(currentHealth);
         } else if (stream.IsReading) {
-            // Receive the health data from the owner client
             currentHealth = (float)stream.ReceiveNext();
+            healthBar.SetHealth(currentHealth);
         }
     }
 
     public void UseItem(Item item)
     {
-        switch (item.itemType)
-        {
-            //ENTER USE STUFF HERE, LIKE ADDING BUFFS
-            //EX:
-            case Item.Type.SpeedBoost:
-                //movement.addspeed or whatever to apply the buff
-                inventory.RemoveItem(new Item { itemType = Item.Type.SpeedBoost, amt = 1 });
-                break;
+        if (!photonView.IsMine) return;
+
+        switch (item.itemType) {
+            // Handle item usage and removal
         }
     }
 
     public void AddBuff(Item item)
     {
-        switch (item.itemType)
-        {
-            case Item.Type.JumpBoost: //jumpheight += item.intensity; break; needs fix
-                break;
-            case Item.Type.SpeedBoost: //speed += item.intensity; break; needs fix
-                break;
-            case Item.Type.RegenBoost:
-                regenerationTime -= item.intensity;
-                regenerationAmount *= 1.5f;
-                break;
-            case Item.Type.AttackBoost:
-                //gun.setDamageMod(gun.getDamageMod() + item.intensity);
-                break;
-            default: break;
+        if (!photonView.IsMine) return;
+
+        switch (item.itemType) {
+            // Handle adding buffs
         }
     }
 
@@ -145,14 +118,14 @@ public class Player : MonoBehaviour, IPunObservable
     }
 
     private void OnTriggerEnter(Collider col)
-    { 
+    {
+        if (!photonView.IsMine) return;
+
         ItemWorld itemWorld = col.GetComponent<ItemWorld>();
-        if (itemWorld != null)
-        {
+        if (itemWorld != null) {
             Item item = itemWorld.GetItem();
             inventory.AddItem(item);
             itemWorld.DestroySelf();
         }
     }
-
 }

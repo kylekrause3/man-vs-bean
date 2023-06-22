@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ec28ca5f1d38d7458331f6b888dc3bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4807032037891918230, guid: d74c81215e6d9234da0dc8dfb796708e, type: 3}
+  playerPrefab: {fileID: 2415859519977491031, guid: df7dd61c6899ebc48a2c543191f81184, type: 3}
   spawnPoint: {fileID: 1006105995}
 --- !u!1 &94123793
 GameObject:
@@ -612,7 +612,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1006105994}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

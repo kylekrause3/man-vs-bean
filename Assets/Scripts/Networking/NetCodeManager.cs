@@ -6,51 +6,40 @@ using Photon.Realtime;
 
 public class NetCodeManager : MonoBehaviourPunCallbacks
 {
-    // Start is called before the first frame update
-
-    public GameObject player;
+    public GameObject playerPrefab;
     public Transform spawnPoint;
 
-    private GameObject playerClient;
+    private GameObject myPlayer;
 
     void Start()
     {
-        Debug.Log("Connecting to host...");
+        Debug.Log("Connecting to server...");
         PhotonNetwork.ConnectUsingSettings();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public override void OnConnectedToMaster()
     {
         base.OnConnectedToMaster();
         Debug.Log("Connected to server");
-
         PhotonNetwork.JoinLobby();
     }
 
     public override void OnJoinedLobby()
     {
         base.OnJoinedLobby();
-
         PhotonNetwork.JoinOrCreateRoom("Test", null, null);
-
-        Debug.Log("Connected to lobby now");
-   
+        Debug.Log("Connected to lobby");
     }
 
     public override void OnJoinedRoom()
     {
         base.OnJoinedRoom();
+        Debug.Log("Connected to room");
 
-        Debug.Log("Connected to room now");
-
-        playerClient = PhotonNetwork.Instantiate(player.name, spawnPoint.position, Quaternion.identity);
-        playerClient.GetComponentInChildren<PlayerSetup>().isLocalPlayer();
+        myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, Quaternion.identity);
+        myPlayer.name = "Local Player Client";
+        myPlayer.GetComponentInChildren<PlayerSetup>()?.isLocalPlayer();
+        
     }
 
     public override void OnDisconnected(DisconnectCause cause)

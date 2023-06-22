@@ -1,16 +1,9 @@
 using Photon.Pun;
 
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-
-public class Enemy : MonoBehaviour, IPunObservable
+public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
 {
-    //[Header("General Vars")]
-    //public GameObject playermodel;
-
     [Header("Health")]
     public HealthBar healthBar;
     public float maxHealth;
@@ -19,7 +12,6 @@ public class Enemy : MonoBehaviour, IPunObservable
     public float regenerationTime;
     float lastTimeHit;
     int lastTimeHitSecs;
-
 
     void Awake()
     {
@@ -33,17 +25,16 @@ public class Enemy : MonoBehaviour, IPunObservable
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            TakeDamage(5f);
+        if (Input.GetKeyDown(KeyCode.K)) {
+            photonView.RPC("TakeDamageRPC", RpcTarget.All, 5f);
         }
-        healthBar.SetHealth(currentHealth);
-        //regen
+
+        // Regen
         if (currentHealth < maxHealth) {
             if ((int)(Time.time % 60) >= lastTimeHitSecs + regenerationTime) {
-                //Heal(regenerationAmount * Time.deltaTime);
+                //photonView.RPC("HealRPC", RpcTarget.All, regenerationAmount * Time.deltaTime);
             }
-        } 
+        }
     }
 
     public void TakeDamage(float damage)
@@ -53,10 +44,27 @@ public class Enemy : MonoBehaviour, IPunObservable
         lastTimeHit = Time.time;
         lastTimeHitSecs = (int)(Time.time % 60);
 
-        if (currentHealth <= 0f)
-        {
-            Death();
+        if (currentHealth <= 0f) {
+            photonView.RPC("DeathRPC", RpcTarget.All);
         }
+    }
+
+    [PunRPC]
+    private void TakeDamageRPC(float damage)
+    {
+        TakeDamage(damage);
+    }
+
+    [PunRPC]
+    private void HealRPC(float amt)
+    {
+        Heal(amt);
+    }
+
+    [PunRPC]
+    private void DeathRPC()
+    {
+        Death();
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -64,11 +72,10 @@ public class Enemy : MonoBehaviour, IPunObservable
         if (stream.IsWriting) {
             // Send the health data to other clients
             stream.SendNext(currentHealth);
-
         } else if (stream.IsReading) {
             // Receive the health data from the owner client
             currentHealth = (float)stream.ReceiveNext();
-            Debug.Log("Reading data: " + currentHealth);
+            healthBar.SetHealth(currentHealth);
         }
     }
 
@@ -80,7 +87,6 @@ public class Enemy : MonoBehaviour, IPunObservable
         if (currentHealth >= maxHealth) {
             currentHealth = maxHealth;
         }
-            
     }
 
     public void Death()
