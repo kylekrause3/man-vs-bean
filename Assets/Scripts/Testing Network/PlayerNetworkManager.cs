@@ -28,8 +28,14 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
             return;
         }
 
+
+
         if (Input.GetButtonDown("Fire1")) {
             gun.shootRPC(camera.transform.position, camera.transform.forward);
+        }
+
+        if (Input.GetButtonDown("Fire2")) {
+            playerHealth.onRespawnRPC();
         }
 
         if (Input.GetKeyDown(KeyCode.J)) {
