@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Gun : MonoBehaviour
+public class Gun : MonoBehaviourPunCallbacks
 {
     /* Raycasting */
     RaycastHit hitInfo;
@@ -34,6 +35,10 @@ public class Gun : MonoBehaviour
 
     void Update()
     {
+        if (!photonView.IsMine)
+        {
+            return;
+        }
         gameObject.transform.rotation = cam.transform.rotation;
         //this logic is so that it's like input.getbuttondown (semi-auto fire). To make it automatic, you need to get rid of the stuff using mouseInUse
         if (Input.GetAxisRaw("Fire1") != 0)
