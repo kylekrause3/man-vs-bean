@@ -16,7 +16,7 @@ public class Gun : MonoBehaviour
     public float fireRate = 5f; //bullets per second
     public float impactforce;
 
-    //public ParticleSystem muzzleFlash;
+    public ParticleSystem muzzleFlash;
     //public GameObject impactEffect;
 
     private float nextFireTime = 0f;
@@ -55,7 +55,7 @@ public class Gun : MonoBehaviour
     {
         if (nextFireTime <= Time.time)
         {
-            //muzzleFlash.Play();
+            muzzleFlash.Play();
 
             origin.position += origin.transform.forward * VirtualCamera.getCamDistance();
             nextFireTime = Time.time + (1f / fireRate);
@@ -86,13 +86,3 @@ public class Gun : MonoBehaviour
         return damagemodifier;
     }
 }
-
-
-
-//HERE LIES UNNECESSARY CALCULUS 3 WORK:
-    //calculation using r = 1, theta = origin.rotation.eulerAngles.y, and phi = origin.rotation.eulerAngles.x
-        /*float q = Mathf.Cos(origin.rotation.eulerAngles.y * Mathf.Deg2Rad);
-        direction.x = Mathf.Cos(origin.rotation.eulerAngles.x * Mathf.Deg2Rad) * q;
-        direction.y = Mathf.Sin(origin.rotation.eulerAngles.x * Mathf.Deg2Rad) * q;
-        direction.z = Mathf.Sin(origin.rotation.eulerAngles.y * Mathf.Deg2Rad);*/
-        //direction is now a vector representation of polar origin.rotation
