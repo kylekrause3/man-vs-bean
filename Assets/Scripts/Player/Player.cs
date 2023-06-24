@@ -38,7 +38,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (Input.GetKeyDown(KeyCode.J)) {
             if (photonView.IsMine) {
-                TakeDamage(5f);
+                TakeDamageRPC(5f);
             }
         }
 
@@ -49,6 +49,11 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
                 }
             }
         }
+    }
+
+    public void TakeDamageRPC(float damage)
+    {
+        photonView.RPC("TakeDamage", RpcTarget.All, damage);
     }
 
     public void TakeDamage(float damage)

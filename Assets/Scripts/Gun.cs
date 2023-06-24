@@ -36,8 +36,8 @@ public class Gun : MonoBehaviourPunCallbacks
                 Enemy enemyHit = hitInfo.transform.GetComponent<Enemy>();
                 Player playerHit = hitInfo.transform.GetComponent<Player>();
                 Debug.DrawLine(origin.position, hitInfo.point, Color.red, .5f);
-                enemyHit?.takeDamageRPC(damage * damagemodifier);
-                playerHit?.TakeDamage(damage * damagemodifier);
+                enemyHit?.TakeDamageRPC(damage * damagemodifier);
+                playerHit?.TakeDamageRPC(damage * damagemodifier);
 
 
                 hitInfo.rigidbody?.AddForce(-hitInfo.normal * impactforce);
