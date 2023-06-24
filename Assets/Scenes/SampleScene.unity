@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 94123796}
   - component: {fileID: 94123795}
   - component: {fileID: 94123794}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fill (enemy healthbar)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 116746235}
   - component: {fileID: 116746234}
   - component: {fileID: 116746232}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HealthBar (canvas)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -630,7 +630,7 @@ GameObject:
   - component: {fileID: 1202151807}
   - component: {fileID: 1202151809}
   - component: {fileID: 1202151808}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -988,7 +988,7 @@ GameObject:
   - component: {fileID: 2041429128}
   - component: {fileID: 2041429127}
   - component: {fileID: 2041429133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TrainingDummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
