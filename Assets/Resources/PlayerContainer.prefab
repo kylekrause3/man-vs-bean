@@ -331,6 +331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6492378350420023395}
   - component: {fileID: 4091683479561070021}
+  - component: {fileID: 539142207353431859}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -374,6 +375,28 @@ MonoBehaviour:
   fireRate: 0
   impactforce: 0
   muzzleFlash: {fileID: 2727108593043473546}
+--- !u!114 &539142207353431859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568652184305991614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &4094147709386255253
 GameObject:
   m_ObjectHideFlags: 0

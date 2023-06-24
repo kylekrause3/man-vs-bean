@@ -22,7 +22,32 @@ public class Gun : MonoBehaviourPunCallbacks
 
     private float nextFireTime = 0f;
     private bool mouseInUse = false;
-    
+
+    [PunRPC]
+    private void shoot()
+    {
+        Transform origin = player.getCamTransform();
+        if (nextFireTime <= Time.time) {
+            muzzleFlash.Play();
+
+            origin.position += origin.transform.forward * VirtualCamera.getCamDistance();
+            nextFireTime = Time.time + (1f / fireRate);
+            if (Physics.Raycast(origin.position, origin.transform.forward, out hitInfo, range)) {
+                Enemy enemyHit = hitInfo.transform.GetComponent<Enemy>();
+                Player playerHit = hitInfo.transform.GetComponent<Player>();
+                Debug.DrawLine(origin.position, hitInfo.point, Color.red, .5f);
+                enemyHit?.TakeDamage(damage * damagemodifier);
+                playerHit?.TakeDamage(damage * damagemodifier);
+
+
+                hitInfo.rigidbody?.AddForce(-hitInfo.normal * impactforce);
+
+                //GameObject impact = Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                //Destroy(impact, 1f);
+            }
+        }
+    }
+
     void Start()
     {
         if (range <= 0f)
@@ -45,39 +70,13 @@ public class Gun : MonoBehaviourPunCallbacks
         {
             if (mouseInUse == false)
             {
-                shoot(player.getCamTransform());
+                photonView.RPC("shoot", RpcTarget.All);
                 mouseInUse = true;
             }
         }
         if (Input.GetAxisRaw("Fire1") == 0)
         {
             mouseInUse = false;
-        }
-    }
-
-
-    public void shoot(Transform origin)
-    {
-        if (nextFireTime <= Time.time)
-        {
-            muzzleFlash.Play();
-
-            origin.position += origin.transform.forward * VirtualCamera.getCamDistance();
-            nextFireTime = Time.time + (1f / fireRate);
-            if (Physics.Raycast(origin.position, origin.transform.forward, out hitInfo, range))
-            {
-                Enemy enemyHit = hitInfo.transform.GetComponent<Enemy>();
-                Player playerHit = hitInfo.transform.GetComponent<Player>();
-                Debug.DrawLine(origin.position, hitInfo.point, Color.red, .5f);
-                enemyHit?.TakeDamage(damage * damagemodifier);
-                playerHit?.TakeDamage(damage * damagemodifier);
-
-
-                hitInfo.rigidbody?.AddForce(-hitInfo.normal * impactforce);
-
-                //GameObject impact = Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-                //Destroy(impact, 1f);
-            }
         }
     }
 
