@@ -18,7 +18,7 @@ public class Gun : MonoBehaviourPunCallbacks
     public float impactforce;
 
     public ParticleSystem muzzleFlash;
-    //public GameObject impactEffect;
+    public GameObject impactEffect;
 
     private float nextFireTime = 0f;
     private bool mouseInUse = false;
@@ -42,8 +42,9 @@ public class Gun : MonoBehaviourPunCallbacks
 
                 hitInfo.rigidbody?.AddForce(-hitInfo.normal * impactforce);
 
-                //GameObject impact = Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
-                //Destroy(impact, 1f);
+                GameObject impact = Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));
+                impact.transform.parent = hitInfo.transform; //this can and usually is in the instantiate, but its here to keep scale of hit impacts relative to world not object
+                Destroy(impact, 10f);
             }
         }
     }

@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     {
+        //this.transform.position = new Vector3(Mathf.Sin(Time.time), 0);
         if (Input.GetKeyDown(KeyCode.K)) {
             TakeDamageRPC(10.0f);
         }

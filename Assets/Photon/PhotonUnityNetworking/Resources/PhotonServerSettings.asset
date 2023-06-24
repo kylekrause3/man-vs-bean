@@ -43,6 +43,8 @@ MonoBehaviour:
   - DeathRPC
   - HealRPC
   - TakeDamageRPC
+  - shoot
+  - TakeDamage
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

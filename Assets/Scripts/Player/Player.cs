@@ -56,6 +56,7 @@ public class Player : MonoBehaviourPunCallbacks, IPunObservable
         photonView.RPC("TakeDamage", RpcTarget.All, damage);
     }
 
+    [PunRPC]
     public void TakeDamage(float damage)
     {
         if (!photonView.IsMine) return;

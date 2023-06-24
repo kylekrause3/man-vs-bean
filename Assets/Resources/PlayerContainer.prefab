@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4319333297271778047}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Model (temporary)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 763619530905894634}
   - component: {fileID: 2700349052983901968}
   - component: {fileID: 3922512322957016485}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Virtual Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   - component: {fileID: 3632232598477201724}
   - component: {fileID: 7993071741262378410}
   - component: {fileID: 8183644334933024006}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 6492378350420023395}
   - component: {fileID: 4091683479561070021}
   - component: {fileID: 539142207353431859}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -375,6 +375,7 @@ MonoBehaviour:
   fireRate: 0
   impactforce: 0
   muzzleFlash: {fileID: 2727108593043473546}
+  impactEffect: {fileID: 1741271588015060077, guid: e71c0ed152b576b48ab2558529b7c829, type: 3}
 --- !u!114 &539142207353431859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,7 +409,7 @@ GameObject:
   - component: {fileID: 485341207055799170}
   - component: {fileID: 9208389355266432914}
   - component: {fileID: 8163683395266876916}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Crosshair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +425,7 @@ RectTransform:
   m_GameObject: {fileID: 4094147709386255253}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8067725168181475206}
@@ -456,14 +457,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 0.8156863}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8c2bb3ac871180645acde4dcbd8e943b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8d645431e135dbf49b617c1c3164911e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -482,7 +483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2160693528395966266}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeadCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -515,7 +516,7 @@ GameObject:
   - component: {fileID: 3919145382794633507}
   - component: {fileID: 8135430965089983345}
   - component: {fileID: 5745223058693268790}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -597,7 +598,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6642160275180692708}
   - component: {fileID: 4185151980784334015}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -652,7 +653,7 @@ GameObject:
   - component: {fileID: 1986429253139951449}
   - component: {fileID: 6043390108418552406}
   - component: {fileID: 3955151481553017821}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -728,7 +729,7 @@ GameObject:
   - component: {fileID: 1422251482179992729}
   - component: {fileID: 727586196850408957}
   - component: {fileID: 6996338783071707210}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fill (player healthbar)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -802,7 +803,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2619651706133160849}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -836,7 +837,7 @@ GameObject:
   - component: {fileID: 8961666513020328002}
   - component: {fileID: 1834298211076320808}
   - component: {fileID: 8251422693727046272}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: cm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -919,7 +920,7 @@ GameObject:
   - component: {fileID: 2866428609844764321}
   - component: {fileID: 3887752444680432317}
   - component: {fileID: 4450309703791461780}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -933,8 +934,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7423179727665084170}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 1.6478612, z: -4}
+  m_LocalRotation: {x: -0.24236313, y: -0.03322319, z: -0.008304696, w: 0.96958107}
+  m_LocalPosition: {x: 0.1679319, y: 0.10045767, z: -4.703381}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1044,7 +1045,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4567600362712401523}
   - component: {fileID: 8303071541383963547}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraFollowTarget
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1092,7 +1093,7 @@ GameObject:
   - component: {fileID: 749656167708925713}
   - component: {fileID: 2945356925886810760}
   - component: {fileID: 7790795773243454040}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1195,7 +1196,7 @@ GameObject:
   - component: {fileID: 9124427355764877849}
   - component: {fileID: 3028257990735125059}
   - component: {fileID: 7106038941815031282}
-  m_Layer: 5
+  m_Layer: 6
   m_Name: Player HealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1391,6 +1392,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: m1911bean
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bd22fa5c4e08a5840acd80d3d73e627e, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1412,6 +1417,10 @@ PrefabInstance:
     - target: {fileID: 746232479221829975, guid: a4d0579c4ab15c34a87b77fb47023be3, type: 3}
       propertyPath: m_Name
       value: muzzle flash
+      objectReference: {fileID: 0}
+    - target: {fileID: 746232479221829975, guid: a4d0579c4ab15c34a87b77fb47023be3, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5788631923594588016, guid: a4d0579c4ab15c34a87b77fb47023be3, type: 3}
       propertyPath: m_RootOrder
