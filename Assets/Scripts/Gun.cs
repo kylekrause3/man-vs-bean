@@ -21,23 +21,21 @@ public class Gun : MonoBehaviourPunCallbacks
     public GameObject impactEffect;
 
     private float nextFireTime = 0f;
-    private bool mouseInUse = false;
 
     [PunRPC]
-    private void shoot()
+    private void shoot(Vector3 originPositon, Vector3 originForward)
     {
-        Transform origin = player.getCamTransform();
         if (nextFireTime <= Time.time) {
             muzzleFlash.Play();
 
-            origin.position += origin.transform.forward * VirtualCamera.getCamDistance();
+            originPositon += originForward * VirtualCamera.getCamDistance();
             nextFireTime = Time.time + (1f / fireRate);
-            if (Physics.Raycast(origin.position, origin.transform.forward, out hitInfo, range)) {
+            if (Physics.Raycast(originPositon, originForward, out hitInfo, range)) {
                 Enemy enemyHit = hitInfo.transform.GetComponent<Enemy>();
-                Player playerHit = hitInfo.transform.GetComponent<Player>();
-                Debug.DrawLine(origin.position, hitInfo.point, Color.red, .5f);
+                PlayerNetworkManager playerHit = hitInfo.transform.GetComponent<PlayerNetworkManager>();
+                Debug.DrawLine(originPositon, hitInfo.point, Color.red, .5f);
                 enemyHit?.TakeDamageRPC(damage * damagemodifier);
-                playerHit?.TakeDamageRPC(damage * damagemodifier);
+                playerHit?.playerHealth.removeHealthRPC(damage * damagemodifier);
 
 
                 hitInfo.rigidbody?.AddForce(-hitInfo.normal * impactforce);
@@ -47,6 +45,11 @@ public class Gun : MonoBehaviourPunCallbacks
                 Destroy(impact, 10f);
             }
         }
+    }
+
+    public void shootRPC(Vector3 originPositon, Vector3 originForward)
+    {
+        photonView.RPC("shoot", RpcTarget.All, originPositon, originForward);
     }
 
     void Start()
@@ -67,18 +70,6 @@ public class Gun : MonoBehaviourPunCallbacks
         }
         gameObject.transform.rotation = cam.transform.rotation;
         //this logic is so that it's like input.getbuttondown (semi-auto fire). To make it automatic, you need to get rid of the stuff using mouseInUse
-        if (Input.GetAxisRaw("Fire1") != 0)
-        {
-            if (mouseInUse == false)
-            {
-                photonView.RPC("shoot", RpcTarget.All);
-                mouseInUse = true;
-            }
-        }
-        if (Input.GetAxisRaw("Fire1") == 0)
-        {
-            mouseInUse = false;
-        }
     }
 
     public void setDamageMod(float x)
