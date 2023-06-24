@@ -26,7 +26,7 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.K)) {
-            photonView.RPC("TakeDamage", RpcTarget.All, 10.0f);
+            takeDamageRPC(10.0f);
         }
 
         // Regen
@@ -35,6 +35,11 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
                 //photonView.RPC("HealRPC", RpcTarget.All, regenerationAmount * Time.deltaTime);
             }
         }
+    }
+
+    public void takeDamageRPC(float damage)
+    {
+        photonView.RPC("TakeDamage", RpcTarget.All, damage);
     }
 
     [PunRPC]
