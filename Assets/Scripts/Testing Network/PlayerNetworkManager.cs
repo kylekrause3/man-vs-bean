@@ -58,10 +58,22 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
 
     public void Despawn()
     {
-        this.Deactivate();
+        photonView.RPC("DespawnRPC", RpcTarget.All);
     }
 
     public void Respawn()
+    {
+        photonView.RPC("RespawnRPC", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void DespawnRPC()
+    {
+        this.Deactivate();
+    }
+
+    [PunRPC]
+    private void RespawnRPC()
     {
         this.Despawn();
         this.virtualCamera.SetActive(false);
