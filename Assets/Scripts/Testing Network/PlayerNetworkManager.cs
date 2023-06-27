@@ -12,7 +12,7 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
     public GameObject normalCamera;
     public GameObject HUD;
 
-    private Transform worldSpawn;
+    private Vector3 worldSpawn;
 
     private void Awake()
     {
@@ -80,9 +80,7 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
         this.virtualCamera.SetActive(false);
         this.normalCamera.SetActive(false);
         photonView.RPC("Activate", RpcTarget.All);
-
-        Debug.Log(playerMovement == null);
-        this.playerMovement.SetPosition(worldSpawn.position);
+        this.playerMovement.SetPosition(worldSpawn);
         this.playerHealth.setHealthRPC(playerHealth.getMaxHealth());
 
 
@@ -117,8 +115,14 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
         gun.enabled = true;
     }
 
-    public void setWorldSpawn(Transform position)
+    [PunRPC]
+    private void setWorldSpawnRPC(Vector3 position)
     {
         this.worldSpawn = position;
+    }
+
+    public void setWorldSpawn(Vector3 position)
+    {
+        photonView.RPC("setWorldSpawnRPC", RpcTarget.All, position);
     }
 }
