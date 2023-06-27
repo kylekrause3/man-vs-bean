@@ -297,6 +297,7 @@ MonoBehaviour:
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
   fill: {fileID: 94123794}
+  text: {fileID: 0}
 --- !u!224 &116746233
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1021,7 +1022,7 @@ GameObject:
   - component: {fileID: 2041429133}
   m_Layer: 6
   m_Name: TrainingDummy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

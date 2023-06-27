@@ -19,6 +19,11 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
             HUD.SetActive(false);
             playerMovement.enabled = false;
             playerRotation.enabled = false;
+            this.tag = "Enemy";
+        }
+        else
+        {
+            this.tag = "Player";
         }
         Vector3Serialization.RegisterVector3();
     }
