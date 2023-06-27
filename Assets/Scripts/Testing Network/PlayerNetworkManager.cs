@@ -19,6 +19,7 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
             HUD.SetActive(false);
             playerMovement.enabled = false;
             playerRotation.enabled = false;
+            gun.enabled = false;
             this.tag = "Enemy";
         }
         else
