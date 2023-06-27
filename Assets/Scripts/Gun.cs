@@ -35,7 +35,6 @@ public class Gun : MonoBehaviourPunCallbacks
                 PlayerNetworkManager playerHit = hitInfo.transform.GetComponent<PlayerNetworkManager>();
                 Debug.DrawLine(originPositon, hitInfo.point, Color.red, .5f);
                 enemyHit?.TakeDamageRPC(damage * damagemodifier);
-                Debug.Log(damage * damagemodifier);
                 playerHit?.playerHealth.removeHealthRPC(damage * damagemodifier);
 
 

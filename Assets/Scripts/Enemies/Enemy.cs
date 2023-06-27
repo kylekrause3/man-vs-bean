@@ -40,14 +40,14 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
 
     public void TakeDamageRPC(float damage)
     {
-        Debug.Log(damage);
-
-        photonView.RPC("TakeDamage", RpcTarget.Others, damage);
+        photonView.RPC("TakeDamage", RpcTarget.AllBuffered, damage);
     }
 
     [PunRPC]
     public void TakeDamage(float damage)
     {
+        Debug.Log(damage);
+
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         lastTimeHit = Time.time;

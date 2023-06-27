@@ -49,7 +49,6 @@ public class HealthSystem : MonoBehaviourPunCallbacks
     private void removeHealth(float amount)
     {
         this.currentHealth -= amount;
-        currentHealth -= amount;
         healthBar.SetHealth(currentHealth);
         lastTimeHit = Time.time;
         lastTimeHitSecs = (int)(Time.time % 60);
