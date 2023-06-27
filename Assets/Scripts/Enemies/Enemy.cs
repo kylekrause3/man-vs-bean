@@ -46,8 +46,6 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void TakeDamage(float damage)
     {
-        Debug.Log(damage);
-
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         lastTimeHit = Time.time;
