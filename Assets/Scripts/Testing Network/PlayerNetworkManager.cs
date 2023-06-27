@@ -8,13 +8,14 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
     public thirdpersonmovement playerMovement;
     public CamMovement playerRotation;
     public Gun gun;
-    public GameObject camera;
+    public GameObject virtualCamera;
+    public GameObject normalCamera;
     public GameObject HUD;
 
     private void Awake()
     {
         if (!photonView.IsMine) {
-            camera.SetActive(false);
+            virtualCamera.SetActive(false);
             HUD.SetActive(false);
             playerMovement.enabled = false;
             playerRotation.enabled = false;
@@ -31,7 +32,7 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
 
 
         if (Input.GetButtonDown("Fire1")) {
-            gun.shootRPC(camera.transform.position, camera.transform.forward);
+            gun.shootRPC(normalCamera.transform.position, normalCamera.transform.forward);
         }
 
         if (Input.GetButtonDown("Fire2")) {

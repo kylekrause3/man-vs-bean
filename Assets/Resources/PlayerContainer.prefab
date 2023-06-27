@@ -521,7 +521,8 @@ MonoBehaviour:
   playerMovement: {fileID: 5288654626811230884}
   playerRotation: {fileID: 9121884798741741480}
   gun: {fileID: 6706268542907444484}
-  camera: {fileID: 5770549146436757672}
+  virtualCamera: {fileID: 5770549146436757672}
+  normalCamera: {fileID: 784756407807311701}
   HUD: {fileID: 6885873043877782146}
 --- !u!114 &8520273351506361215
 MonoBehaviour:
@@ -1061,7 +1062,7 @@ MonoBehaviour:
   m_DistanceLimit: 0
   m_MinimumOcclusionTime: 0
   m_CameraRadius: 0.1
-  m_Strategy: 1
+  m_Strategy: 0
   m_MaximumEffort: 4
   m_SmoothingTime: 0
   m_Damping: 0
