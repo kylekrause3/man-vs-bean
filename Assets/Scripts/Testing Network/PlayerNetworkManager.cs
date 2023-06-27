@@ -69,25 +69,28 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
     [PunRPC]
     private void DespawnRPC()
     {
-        this.Deactivate();
+        photonView.RPC("Deactivate", RpcTarget.All);
+
     }
 
     [PunRPC]
     private void RespawnRPC()
     {
-        this.Despawn();
+        photonView.RPC("DespawnRPC", RpcTarget.All);
         this.virtualCamera.SetActive(false);
         this.normalCamera.SetActive(false);
-        this.Activate();
+        photonView.RPC("Activate", RpcTarget.All);
 
+        Debug.Log(playerMovement == null);
         this.playerMovement.SetPosition(worldSpawn.position);
-
         this.playerHealth.setHealthRPC(playerHealth.getMaxHealth());
+
 
         this.virtualCamera.SetActive(true);
         this.normalCamera.SetActive(true);
     }
 
+    [PunRPC]
     private void Deactivate()
     {
         foreach (Transform child in transform)
@@ -101,6 +104,7 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
 
     }
 
+    [PunRPC]
     private void Activate()
     {
         foreach (Transform child in transform)
