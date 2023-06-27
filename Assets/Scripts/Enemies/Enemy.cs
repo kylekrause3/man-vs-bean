@@ -40,7 +40,9 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
 
     public void TakeDamageRPC(float damage)
     {
-        photonView.RPC("TakeDamage", RpcTarget.All, damage);
+        Debug.Log(damage);
+
+        photonView.RPC("TakeDamage", RpcTarget.Others, damage);
     }
 
     [PunRPC]
