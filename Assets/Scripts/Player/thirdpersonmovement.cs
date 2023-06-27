@@ -69,6 +69,7 @@ public class thirdpersonmovement : MonoBehaviour
         verticalMovementAmount.y -= airDescentSpeed * Time.deltaTime;
 
         controller.Move((move.normalized * activespeed + verticalMovementAmount) * Time.deltaTime);
+        
     }
 
     void OnDrawGizmos()
@@ -76,5 +77,12 @@ public class thirdpersonmovement : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(groundCheck.position, ground_check_size);
         Gizmos.DrawWireSphere(headCheck.position, ground_check_size);
+    }
+
+    public void SetPosition(Vector3 position)
+    {
+        controller.enabled = false;
+        transform.position = position;
+        controller.enabled = true;
     }
 }

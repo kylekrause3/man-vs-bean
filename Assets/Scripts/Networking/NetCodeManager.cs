@@ -38,6 +38,8 @@ public class NetCodeManager : MonoBehaviourPunCallbacks
 
         myPlayer = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint.position, Quaternion.identity);
         myPlayer.name = "Local Player Client";
+        myPlayer.GetComponentInChildren<PlayerNetworkManager>().setWorldSpawn(spawnPoint);
+
 
     }
 

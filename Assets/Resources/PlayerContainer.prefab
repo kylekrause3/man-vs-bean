@@ -392,10 +392,10 @@ GameObject:
   - component: {fileID: 5527733163501002237}
   - component: {fileID: 6357778319706147306}
   - component: {fileID: 5288654626811230884}
-  - component: {fileID: 5284356275025173741}
   - component: {fileID: 8520273351506361215}
-  - component: {fileID: 4446351330290608698}
   - component: {fileID: 2883157838617955753}
+  - component: {fileID: 1098036464318841367}
+  - component: {fileID: 541081651272417290}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -508,25 +508,6 @@ MonoBehaviour:
   runSpeed: 9
   jumpHeight: 5
   airDescentSpeed: 20
---- !u!114 &5284356275025173741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2611871429838700974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6beeffef99183244e817a787b71b5da4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealth: {fileID: 8520273351506361215}
-  playerMovement: {fileID: 5288654626811230884}
-  playerRotation: {fileID: 9121884798741741480}
-  gun: {fileID: 6706268542907444484}
-  virtualCamera: {fileID: 5770549146436757672}
-  normalCamera: {fileID: 784756407807311701}
-  HUD: {fileID: 6885873043877782146}
 --- !u!114 &8520273351506361215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,7 +520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 186333a540dad7d42bf6c53918978ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 0}
   spawnPoint: {x: 0, y: 0, z: 0}
   healthBar: {fileID: 2143999354665537757}
   maxHealth: 200
@@ -548,7 +528,23 @@ MonoBehaviour:
   regenerationTime: 5
   lastTimeHit: 0
   lastTimeHitSecs: 0
---- !u!114 &4446351330290608698
+--- !u!114 &2883157838617955753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2611871429838700974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 0
+--- !u!114 &1098036464318841367
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -571,7 +567,7 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &2883157838617955753
+--- !u!114 &541081651272417290
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -580,13 +576,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2611871429838700974}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Script: {fileID: 11500000, guid: 6beeffef99183244e817a787b71b5da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
-  m_UseLocal: 0
+  playerHealth: {fileID: 8520273351506361215}
+  playerMovement: {fileID: 5288654626811230884}
+  camMovement: {fileID: 9121884798741741480}
+  gun: {fileID: 6706268542907444484}
+  virtualCamera: {fileID: 5770549146436757672}
+  normalCamera: {fileID: 784756407807311701}
+  HUD: {fileID: 6885873043877782146}
 --- !u!1 &2623196687392481194
 GameObject:
   m_ObjectHideFlags: 0

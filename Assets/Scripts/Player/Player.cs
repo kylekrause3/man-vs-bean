@@ -25,9 +25,6 @@ public class Player : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J)) {
-
-        }
     }
 
     public void UseItem(Item item)

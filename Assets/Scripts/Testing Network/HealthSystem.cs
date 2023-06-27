@@ -1,13 +1,13 @@
 using UnityEngine;
 using Photon.Pun;
+using Unity.VisualScripting;
 
 public class HealthSystem : MonoBehaviourPunCallbacks
 {
     private GameObject localPlayer;
-    public GameObject playerPrefab;
     public Vector3 spawnPoint;
     public HealthBar healthBar;
-    [SerializeField] public float maxHealth;
+    [SerializeField] private float maxHealth;
     [SerializeField] private float currentHealth;
     public float regenerationAmount;
     public float regenerationTime;
@@ -25,7 +25,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks
     private void Update()
     {
         healthBar.SetHealth(this.currentHealth);
-        if (currentHealth < maxHealth) {
+        if (currentHealth < maxHealth && !isDead) {
             if ((int)(Time.time % 60) >= lastTimeHitSecs + regenerationTime) {
                 if (photonView.IsMine) {
                     addHealthRPC(regenerationAmount * Time.deltaTime);
@@ -37,6 +37,10 @@ public class HealthSystem : MonoBehaviourPunCallbacks
     public float getCurrentHealth()
     {
         return this.currentHealth;
+    }
+    public float getMaxHealth()
+    {
+        return this.maxHealth;
     }
 
     [PunRPC]
@@ -68,21 +72,13 @@ public class HealthSystem : MonoBehaviourPunCallbacks
     private void onDeath()
     {
         if (photonView.IsMine) {
-            PhotonNetwork.Destroy(this.gameObject);
+            this.GetComponent<PlayerNetworkManager>().Despawn();
+
             isDead = true;
         }
     }
 
-    [PunRPC]
-    private void onRespawn()
-    {
-        if (isDead) {
-            localPlayer = PhotonNetwork.Instantiate(playerPrefab.name, spawnPoint, Quaternion.identity);
-            localPlayer.name = "Local Player Client";
-        }
-    }
-
-    public void setCurrentHealthRPC(float value)
+    public void setHealthRPC(float value)
     {
         photonView.RPC("setCurrentHealth", RpcTarget.All, value);
     }
@@ -100,10 +96,5 @@ public class HealthSystem : MonoBehaviourPunCallbacks
     public void onDeathRPC()
     {
         photonView.RPC("onDeath", RpcTarget.All);
-    }
-
-    public void onRespawnRPC()
-    {
-        photonView.RPC("onRespawn", RpcTarget.All);
     }
 }
