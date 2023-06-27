@@ -4930,6 +4930,7 @@ GameObject:
   m_Component:
   - component: {fileID: 765589154509133233}
   - component: {fileID: 2273938452674340530}
+  - component: {fileID: 8660926113982294314}
   m_Layer: 0
   m_Name: bullethole
   m_TagString: Untagged
@@ -5004,6 +5005,53 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8660926113982294314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5465496115163810745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e33f88a73dba96044b1dde0bca3d0174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToReduce: 5
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.0024909973
+      value: 0.99292374
+      inSlope: -0.37083045
+      outSlope: -0.37083045
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.5543218
+      value: 0.78828806
+      inSlope: -0.72781277
+      outSlope: -0.72781277
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.12601477
+      outWeight: 0.21484229
+    - serializedVersion: 3
+      time: 1.0050049
+      value: 0
+      inSlope: -1.7490963
+      outSlope: -1.7490963
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spriteRenderer: {fileID: 2273938452674340530}
 --- !u!1 &6203682873875804781
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,18 +34,18 @@ public class Player : MonoBehaviourPunCallbacks
     {
         if (!photonView.IsMine) return;
 
-        switch (item.itemType) {
-            // Handle item usage and removal
-        }
+        //switch (item.itemType) {
+        //    // Handle item usage and removal
+        //}
     }
 
     public void AddBuff(Item item)
     {
         if (!photonView.IsMine) return;
 
-        switch (item.itemType) {
-            // Handle adding buffs
-        }
+        //switch (item.itemType) {
+        //    // Handle adding buffs
+        //}
     }
 
     /*
