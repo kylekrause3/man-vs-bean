@@ -20,6 +20,8 @@ public class Gun : MonoBehaviourPunCallbacks
     public ParticleSystem muzzleFlash;
     public GameObject impactEffect;
 
+    public HitMarkerHandler hitMarkerHandler;
+
     private float nextFireTime = 0f;
 
     [PunRPC]
@@ -35,8 +37,16 @@ public class Gun : MonoBehaviourPunCallbacks
                 PlayerNetworkManager playerHit = hitInfo.transform.GetComponent<PlayerNetworkManager>();
                 Debug.DrawLine(originPositon, hitInfo.point, Color.red, .5f);
                 if (photonView.IsMine) {
-                    enemyHit?.TakeDamageRPC(damage * damagemodifier);
-                    playerHit?.playerHealth.removeHealthRPC(damage * damagemodifier);
+                    if (enemyHit != null)
+                    {
+                        enemyHit.TakeDamageRPC(damage * damagemodifier);
+                        hitMarkerHandler.hit();
+                    }
+                    else if(playerHit != null)
+                    {
+                        playerHit?.playerHealth.removeHealthRPC(damage * damagemodifier);
+                        hitMarkerHandler.hit();
+                    }
                 }
                 hitInfo.rigidbody?.AddForce(-hitInfo.normal * impactforce);
                 GameObject impact = Instantiate(impactEffect, hitInfo.point, Quaternion.LookRotation(hitInfo.normal));

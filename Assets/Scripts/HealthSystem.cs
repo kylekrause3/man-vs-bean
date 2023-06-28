@@ -66,6 +66,11 @@ public class HealthSystem : MonoBehaviourPunCallbacks
     private void addHealth(float amount)
     {
         this.currentHealth += amount;
+
+        if(this.currentHealth > maxHealth)
+        {
+            this.currentHealth = maxHealth;
+        }
     }
 
     [PunRPC]

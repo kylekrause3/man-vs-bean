@@ -32,7 +32,7 @@ public class HealthBar : MonoBehaviour
 
         if(text != null)
         {
-            text.SetText(((int)health).ToString());
+            text.SetText(((int)Mathf.Ceil(health)).ToString());
             float addAmount = 1.0f - textSaturation;
             text.color = fill.color + new Color(addAmount, addAmount, addAmount);
         }
