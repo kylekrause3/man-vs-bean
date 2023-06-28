@@ -71,6 +71,7 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
 
     public void Activate()
     {
+        
         HUD.SetActive(true);
         playerMovement.enabled = true;
         camMovement.enabled = true;
@@ -122,18 +123,18 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void TransformState(Transform networkObject, bool state)
+    private void TransformEnabled(Transform networkObject, bool state)
     {
         networkObject.gameObject.SetActive(state);
     }
 
-    public void TransformStateRPC(Transform networkObject, bool state)
+    public void TransformEnabledRPC(Transform networkObject, bool state)
     {
-        photonView.RPC("TransformState", RpcTarget.All, networkObject, state);
+        photonView.RPC("TransformEnabled", RpcTarget.All, networkObject, state);
     }
 
     [PunRPC]
-    private void GameObjectState(GameObject networkObject, bool state)
+    private void GameObjectEnabled(GameObject networkObject, bool state)
     {
         networkObject.SetActive(state);
     }
