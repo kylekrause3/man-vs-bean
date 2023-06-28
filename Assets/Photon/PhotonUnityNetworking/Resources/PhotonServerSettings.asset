@@ -50,6 +50,18 @@ MonoBehaviour:
   - removeHealth
   - setCurrentHealth
   - onRespawn
+  - DespawnRPC
+  - RespawnRPC
+  - Activate
+  - Deactivate
+  - setWorldSpawnRPC
+  - Despawn
+  - Respawn
+  - setWorldSpawn
+  - gameObjectRPC
+  - gameObjectState
+  - GameObjectState
+  - TransformState
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

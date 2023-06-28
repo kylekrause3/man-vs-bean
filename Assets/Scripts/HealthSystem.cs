@@ -71,11 +71,12 @@ public class HealthSystem : MonoBehaviourPunCallbacks
     [PunRPC]
     private void onDeath()
     {
-        if (photonView.IsMine) {
-            this.GetComponent<PlayerNetworkManager>().Despawn();
-
-            isDead = true;
+        if (!photonView.IsMine) {
+            return;
         }
+        this.GetComponent<PlayerNetworkManager>().Deactivate();
+        this.GetComponent<PlayerNetworkManager>().DespawnRPC();
+        isDead = true;
     }
 
     public void setHealthRPC(float value)

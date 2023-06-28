@@ -7,12 +7,11 @@ public class Vector3Serialization : MonoBehaviour
 {
     static public void RegisterVector3()
     {
-        // Register the Vector3 serialization methods
         PhotonPeer.RegisterType(
-            typeof(Vector3),  // Custom type class
-            (byte)'V',        // Custom type code (choose an unused byte code)
-            SerializeVector3, // Serialization method
-            DeserializeVector3 // Deserialization method
+            typeof(Vector3),  
+            (byte)'V',
+            SerializeVector3, 
+            DeserializeVector3 
         );
     }
 

@@ -393,9 +393,9 @@ GameObject:
   - component: {fileID: 6357778319706147306}
   - component: {fileID: 5288654626811230884}
   - component: {fileID: 8520273351506361215}
+  - component: {fileID: 541081651272417290}
   - component: {fileID: 2883157838617955753}
   - component: {fileID: 1098036464318841367}
-  - component: {fileID: 541081651272417290}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -528,6 +528,27 @@ MonoBehaviour:
   regenerationTime: 5
   lastTimeHit: 0
   lastTimeHitSecs: 0
+--- !u!114 &541081651272417290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2611871429838700974}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6beeffef99183244e817a787b71b5da4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: {fileID: 8520273351506361215}
+  playerMovement: {fileID: 5288654626811230884}
+  camMovement: {fileID: 9121884798741741480}
+  gun: {fileID: 6706268542907444484}
+  virtualCamera: {fileID: 5770549146436757672}
+  mainCamera: {fileID: 784756407807311701}
+  HUD: {fileID: 6885873043877782146}
+  playerCollider: {fileID: 6390653826553245802}
+  characterController: {fileID: 5527733163501002237}
 --- !u!114 &2883157838617955753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -567,25 +588,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &541081651272417290
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2611871429838700974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6beeffef99183244e817a787b71b5da4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealth: {fileID: 8520273351506361215}
-  playerMovement: {fileID: 5288654626811230884}
-  camMovement: {fileID: 9121884798741741480}
-  gun: {fileID: 6706268542907444484}
-  virtualCamera: {fileID: 5770549146436757672}
-  normalCamera: {fileID: 784756407807311701}
-  HUD: {fileID: 6885873043877782146}
 --- !u!1 &2623196687392481194
 GameObject:
   m_ObjectHideFlags: 0
