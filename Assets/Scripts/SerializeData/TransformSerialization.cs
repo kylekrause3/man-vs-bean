@@ -1,11 +1,10 @@
 using UnityEngine;
-using Photon.Pun;
 using ExitGames.Client.Photon;
-using System.IO;
+using System;
 
-public class TransformSerialization : MonoBehaviour
+public class TransformSerialization
 {
-    static public void RegisterTransform()
+    public static void RegisterTransform()
     {
         PhotonPeer.RegisterType(
             typeof(Transform),
@@ -18,50 +17,39 @@ public class TransformSerialization : MonoBehaviour
     private static byte[] SerializeTransform(object obj)
     {
         Transform transform = (Transform)obj;
+        Vector3 position = transform.position;
+        Quaternion rotation = transform.rotation;
 
-        using (MemoryStream stream = new MemoryStream()) {
-            using (BinaryWriter writer = new BinaryWriter(stream)) {
-                writer.Write(transform.localPosition.x);
-                writer.Write(transform.localPosition.y);
-                writer.Write(transform.localPosition.z);
+        byte[] data = new byte[28];
+        Buffer.BlockCopy(BitConverter.GetBytes(position.x), 0, data, 0, 4);
+        Buffer.BlockCopy(BitConverter.GetBytes(position.y), 0, data, 4, 4);
+        Buffer.BlockCopy(BitConverter.GetBytes(position.z), 0, data, 8, 4);
+        Buffer.BlockCopy(BitConverter.GetBytes(rotation.x), 0, data, 12, 4);
+        Buffer.BlockCopy(BitConverter.GetBytes(rotation.y), 0, data, 16, 4);
+        Buffer.BlockCopy(BitConverter.GetBytes(rotation.z), 0, data, 20, 4);
+        Buffer.BlockCopy(BitConverter.GetBytes(rotation.w), 0, data, 24, 4);
 
-                writer.Write(transform.localRotation.x);
-                writer.Write(transform.localRotation.y);
-                writer.Write(transform.localRotation.z);
-                writer.Write(transform.localRotation.w);
-
-                writer.Write(transform.localScale.x);
-                writer.Write(transform.localScale.y);
-                writer.Write(transform.localScale.z);
-            }
-
-            return stream.ToArray();
-        }
+        return data;
     }
 
     private static object DeserializeTransform(byte[] data)
     {
-        Transform transform = new GameObject().transform;
+        Vector3 position = new Vector3(
+            BitConverter.ToSingle(data, 0),
+            BitConverter.ToSingle(data, 4),
+            BitConverter.ToSingle(data, 8)
+        );
+        Quaternion rotation = new Quaternion(
+            BitConverter.ToSingle(data, 12),
+            BitConverter.ToSingle(data, 16),
+            BitConverter.ToSingle(data, 20),
+            BitConverter.ToSingle(data, 24)
+        );
 
-        using (MemoryStream stream = new MemoryStream(data)) {
-            using (BinaryReader reader = new BinaryReader(stream)) {
-                float posX = reader.ReadSingle();
-                float posY = reader.ReadSingle();
-                float posZ = reader.ReadSingle();
-                transform.localPosition = new Vector3(posX, posY, posZ);
-
-                float rotX = reader.ReadSingle();
-                float rotY = reader.ReadSingle();
-                float rotZ = reader.ReadSingle();
-                float rotW = reader.ReadSingle();
-                transform.localRotation = new Quaternion(rotX, rotY, rotZ, rotW);
-
-                float scaleX = reader.ReadSingle();
-                float scaleY = reader.ReadSingle();
-                float scaleZ = reader.ReadSingle();
-                transform.localScale = new Vector3(scaleX, scaleY, scaleZ);
-            }
-        }
+        GameObject dummyObject = new GameObject();
+        Transform transform = dummyObject.transform;
+        transform.position = position;
+        transform.rotation = rotation;
 
         return transform;
     }

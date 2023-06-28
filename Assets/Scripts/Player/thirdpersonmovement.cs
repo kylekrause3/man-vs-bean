@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class thirdpersonmovement : MonoBehaviour
+public class ThirdPersonMovement : MonoBehaviour
 {
     public Transform player;
     public CharacterController controller;

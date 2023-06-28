@@ -17,8 +17,6 @@ public class NetCodeManager : MonoBehaviourPunCallbacks
         PhotonNetwork.ConnectUsingSettings();
         if (PhotonNetwork.IsConnected) {
             Vector3Serialization.RegisterVector3();
-            GameObjectSerialization.RegisterGameObject();
-            TransformSerialization.RegisterTransform();
         }
     }
 

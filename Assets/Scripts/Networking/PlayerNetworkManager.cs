@@ -2,11 +2,12 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public class PlayerNetworkManager : MonoBehaviourPunCallbacks
 {
     public HealthSystem playerHealth;
-    public thirdpersonmovement playerMovement;
+    public ThirdPersonMovement playerMovement;
     public CamMovement camMovement;
     public Gun gun;
     public GameObject virtualCamera;
@@ -67,6 +68,9 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
         playerMovement.enabled = false;
         camMovement.enabled = false;
         gun.enabled = false;
+
+        //PhotonObject.photonViewInstance.RPC("EnableScript", RpcTarget.All, "CapsuleCollider", false);
+        //PhotonObject.photonViewInstance.RPC("EnableScript", RpcTarget.All, "CharacterController", false);
     }
 
     public void Activate()
@@ -76,6 +80,10 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
         playerMovement.enabled = true;
         camMovement.enabled = true;
         gun.enabled = true;
+
+        //PhotonObject.photonViewInstance.RPC("EnableScript", RpcTarget.All, "CapsuleCollider", true);
+        //PhotonObject.photonViewInstance.RPC("EnableScript", RpcTarget.All, "CharacterController", true);
+        //this.playerHealth.setHealthRPC(playerHealth.getMaxHealth());
     }
 
     [PunRPC]
@@ -85,6 +93,7 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
         characterController.enabled = false;
         foreach (Transform child in transform) {
             child.gameObject.SetActive(false);
+            //PhotonObject.photonViewInstance.RPC("SetGameObjectActive", RpcTarget.All, child.gameObject.name, false);
         }
     }
 
@@ -101,7 +110,6 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
         foreach (Transform child in transform) {
             child.gameObject.SetActive(true);
         }
-
         this.playerMovement.SetPosition(worldSpawn);
         this.playerHealth.setHealthRPC(playerHealth.getMaxHealth());
     }
@@ -120,27 +128,5 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
     public void setWorldSpawnRPC(Vector3 position)
     {
         photonView.RPC("setWorldSpawn", RpcTarget.All, position);
-    }
-
-    [PunRPC]
-    private void TransformEnabled(Transform networkObject, bool state)
-    {
-        networkObject.gameObject.SetActive(state);
-    }
-
-    public void TransformEnabledRPC(Transform networkObject, bool state)
-    {
-        photonView.RPC("TransformEnabled", RpcTarget.All, networkObject, state);
-    }
-
-    [PunRPC]
-    private void GameObjectEnabled(GameObject networkObject, bool state)
-    {
-        networkObject.SetActive(state);
-    }
-
-    public void GameObjectStateRPC(GameObject networkObject, bool state)
-    {
-        photonView.RPC("GameObjectState", RpcTarget.All, networkObject, state);
     }
 }

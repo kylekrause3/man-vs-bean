@@ -1,66 +1,33 @@
-using Photon.Pun;
-
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviourPunCallbacks
+public class Player : MonoBehaviour
 {
-    [Header("General Variables")]
-    public GameObject playermodel;
-    //public Transform camtransform;
-
-    [Header("Inventory")]
-    public Inventory inventory;
-
-    void Awake()
+    bool toggleCursorLock = false;
+    internal void AddBuff(Item item)
     {
+        throw new NotImplementedException();
     }
 
+    // Start is called before the first frame update
     void Start()
     {
-
-        inventory = new Inventory(UseItem, this);
-
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    // Update is called once per frame
     void Update()
     {
-    }
-
-    public void UseItem(Item item)
-    {
-        if (!photonView.IsMine) return;
-
-        //switch (item.itemType) {
-        //    // Handle item usage and removal
-        //}
-    }
-
-    public void AddBuff(Item item)
-    {
-        if (!photonView.IsMine) return;
-
-        //switch (item.itemType) {
-        //    // Handle adding buffs
-        //}
-    }
-
-    /*
-    public Transform getCamTransform()
-    {
-        return camtransform;
-    }
-    */
-
-    private void OnTriggerEnter(Collider col)
-    {
-        if (!photonView.IsMine) return;
-
-        ItemWorld itemWorld = col.GetComponent<ItemWorld>();
-        if (itemWorld != null) {
-            Item item = itemWorld.GetItem();
-            inventory.AddItem(item);
-            itemWorld.DestroySelf();
+        if(Input.GetKeyDown(KeyCode.C)) {
+            toggleCursorLock = !toggleCursorLock;
+            if (toggleCursorLock) {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
+            else {
+                Cursor.lockState = CursorLockMode.None;
+            }
         }
     }
 }

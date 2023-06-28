@@ -9,14 +9,14 @@ public class UI_Inventory : MonoBehaviour
     Inventory inventory;
     Transform itemSlotContainer;
     Transform itemSlotTemplate;
-    //Transform itemSlotText;
+    Transform itemSlotText;
     private Player player;
 
     private void Awake()
     {
         itemSlotContainer = transform.Find("Slots");
         itemSlotTemplate = itemSlotContainer.Find("SlotTemplate");
-        //itemSlotText = itemSlotTemplate.Find("Text");
+        itemSlotText = itemSlotTemplate.Find("Text");
     }
 
 
@@ -63,7 +63,7 @@ public class UI_Inventory : MonoBehaviour
             {   //drop item skeleton
                 Item dupe = new Item { itemType = item.itemType, amt = item.amt};
                 inventory.RemoveItem(item);
-                ItemWorld.DropItem(player.transform.position, dupe);
+                //ItemWorld.DropItem(player.transform.position, dupe);
             }
 
 
