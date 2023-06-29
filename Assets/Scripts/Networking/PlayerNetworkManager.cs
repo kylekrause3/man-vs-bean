@@ -15,6 +15,7 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
     public GameObject HUD;
     public CapsuleCollider playerCollider;
     public CharacterController characterController;
+    public ProjectileArc projectile;
 
     private Vector3 worldSpawn;
 
@@ -51,6 +52,10 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
 
             this.virtualCamera.SetActive(true);
             this.mainCamera.SetActive(true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.G)) {
+            projectile.throwObjectRPC();
         }
 
         if (Input.GetKeyDown(KeyCode.J)) {
