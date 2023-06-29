@@ -1,20 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
 public class Billboard : MonoBehaviour
 {
-    public Transform cam;
+    Transform cameraTransform;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        cameraTransform = transform;        
     }
 
-    // Update is called once per frame
-    void LateUpdate() //always called after regular update
+    void Update()
     {
-        transform.LookAt(transform.position + cam.forward);
+        if (GameObject.Find("Main Camera") != null) {
+            cameraTransform = GameObject.Find("Main Camera").transform;
+        }
+        transform.LookAt(cameraTransform.transform);
+        transform.Rotate(Vector3.up * 180);
     }
 }
