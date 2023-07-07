@@ -11,13 +11,13 @@ public class ProjectileArc : MonoBehaviourPunCallbacks
     public float curveDuration = 1f;
 
     [PunRPC]
-    public void throwObject()
+    public void throwObject(Vector3 transformPos, Quaternion transformRot, Vector3 transformForward)
     {
-        GameObject thrownObject = Instantiate(objectThrown, transform.position, transform.rotation);
+        GameObject thrownObject = Instantiate(objectThrown, transformPos, transformRot);
         Rigidbody rb = thrownObject.GetComponent<Rigidbody>();
 
         if (rb != null) {
-            rb.AddForce(transform.forward * throwForce, ForceMode.Impulse);
+            rb.AddForce(transformForward * throwForce, ForceMode.Impulse);
 
             // Apply the curve to the object's trajectory
             StartCoroutine(ApplyCurve(rb));
@@ -25,9 +25,9 @@ public class ProjectileArc : MonoBehaviourPunCallbacks
         Destroy(thrownObject, 5);
     }
 
-    public void throwObjectRPC()
+    public void throwObjectRPC(Vector3 transformPos, Quaternion transformRot, Vector3 transformForward)
     {
-        photonView.RPC("throwObject", RpcTarget.All);
+        photonView.RPC("throwObject", RpcTarget.All, transformPos, transformRot, transformForward);
     }
 
     private IEnumerator ApplyCurve(Rigidbody rb)

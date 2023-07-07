@@ -50,7 +50,7 @@ public class HealthSystem : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    private void removeHealth(float amount)
+    public void removeHealth(float amount)
     {
         this.currentHealth -= amount;
         healthBar.SetHealth(currentHealth);

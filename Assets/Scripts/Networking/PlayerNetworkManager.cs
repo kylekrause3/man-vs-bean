@@ -27,6 +27,7 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
             HUD.SetActive(false);
             playerMovement.enabled = false;
             camMovement.enabled = false;
+            projectile.enabled = false;
             this.tag = "Enemy";
         } else {
             this.tag = "Player";
@@ -55,7 +56,7 @@ public class PlayerNetworkManager : MonoBehaviourPunCallbacks
         }
 
         if (Input.GetKeyDown(KeyCode.G)) {
-            projectile.throwObjectRPC();
+            projectile.throwObjectRPC(camMovement.transform.position, camMovement.transform.rotation, camMovement.transform.forward);
         }
 
         if (Input.GetKeyDown(KeyCode.J)) {
