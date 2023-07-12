@@ -25,7 +25,7 @@ public class MainMenuManager : MonoBehaviour
     {
         mainMenuPanel.SetActive(true);
         hostGamePanel.SetActive(false);
-        findGamePanel.SetActive(false);
+        //findGamePanel.SetActive(false);
         settingsPanel.SetActive(false);
     }
 
