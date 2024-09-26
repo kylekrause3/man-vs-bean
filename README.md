@@ -1,5 +1,6 @@
 ![fire2](https://github.com/kylekrause3/man-vs-bean/blob/main/pictures/fire2.png)
 # man-vs-bean
+Work in progress casual/party third person shooter. \
 Unity v2022.3.1f1
 
 
